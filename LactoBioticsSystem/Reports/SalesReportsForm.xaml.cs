@@ -21,38 +21,11 @@ namespace LactoBioticsSystem.Reports
     /// </summary>
     public partial class SalesReportsForm : UserControl
     {
-        class SalesReportViewModel
-        {
-            public List<SalesReport> SalesReports { get; set; }
-        }
+      
         public SalesReportsForm()
         {
             DatabaseDataContext db = new DatabaseDataContext();
-            var VM = new SalesReportViewModel { SalesReports = (from sp in db.SalesReports select sp).ToList() };
             InitializeComponent();
-            this.DataContext = VM;
-        }
-        public void Print(FlowDocument fd)
-        {
-            var pd = new PrintDialog();
-            if (pd.ShowDialog().Value)
-            {
-                IDocumentPaginatorSource document = fd as IDocumentPaginatorSource;
-                try
-                {
-                    pd.PrintDocument(document.DocumentPaginator, "Printing FlowDocument.");
-                    MessageBox.Show("Successfully printed");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-        }
-
-        private void btn_print_click(object sender, RoutedEventArgs e)
-        {
-            Print(fd_document);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="LactoBioticsss" Class="DatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-EFV0F9NE\CEJASEARL;Initial Catalog=LactoBioticsss;Integrated Security=True" SettingsObjectName="LactoBioticsSystem.Properties.Settings" SettingsPropertyName="LactoBioticsssConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=NEIL\SQLEXPRESS;Initial Catalog=LactoBioticsss;Integrated Security=True" SettingsObjectName="LactoBioticsSystem.Properties.Settings" SettingsPropertyName="LactoBioticsssConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.customers" Member="customers">
     <Type Name="customer">
       <Column Name="customer_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />

@@ -12,11 +12,12 @@ namespace LactoBioticsSystem
 {
     public partial class ViewSalesReportsForm : Form
     {
+        DatabaseDataContext db = new DatabaseDataContext();
+        IQueryable<SalesReport> filteredSalesReport;
         public ViewSalesReportsForm()
         {
             InitializeComponent();
         }
-        DatabaseDataContext db = new DatabaseDataContext();
         private void PicboxPUclose_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -24,12 +25,24 @@ namespace LactoBioticsSystem
 
         private void ViewSalesReportsForm_Load(object sender, EventArgs e)
         {
-            dgvSalesInventory.DataSource = db.sp_view_SalesReports();
+            cmbbox_salesReportFilter.SelectedIndex = 0;
         }
 
         private void BtnPrintSalesReports_Click(object sender, EventArgs e)
         {
-            new Reports.ViewSalesReport().ShowDialog();
+            new Reports.ViewSalesReport(filteredSalesReport).ShowDialog();
+        }
+
+        private void Cmbbox_salesReportFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cmbbox_salesReportFilter.Text)
+            {
+                case "Daily": filteredSalesReport = (from sales in db.SalesReports where sales.date_.Value.Date == DateTime.Now.Date select sales); break;
+                case "Weekly": filteredSalesReport = (from sales in db.SalesReports where sales.date_.Value.Date >= DateTime.Now.AddDays(-7).Date && sales.date_.Value.Date <= DateTime.Now.Date select sales); break;
+                case "Month": filteredSalesReport = (from sales in db.SalesReports where sales.date_.Value.Date >= DateTime.Now.AddMonths(-1).Date && sales.date_.Value.Date <= DateTime.Now.Date select sales); break;
+            }
+            dgvSalesInventory.DataSource = filteredSalesReport;
+            dgvSalesInventory.Refresh();
         }
     }
 }

@@ -57,7 +57,7 @@ namespace LactoBioticsSystem
     #endregion
 		
 		public DatabaseDataContext() : 
-				base(global::LactoBioticsSystem.Properties.Settings.Default.LactoBioticsssConnectionString, mappingSource)
+				base(global::LactoBioticsSystem.Properties.Settings.Default.LactoBioticsssConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
