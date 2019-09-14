@@ -25,7 +25,8 @@ namespace LactoBioticsSystem
 
         private void ViewSalesReportsForm_Load(object sender, EventArgs e)
         {
-            cmbbox_salesReportFilter.SelectedIndex = 0;
+            toggleDatePickerVisibility(false);
+            cmbbox_filter.SelectedIndex = 0;
         }
 
         private void BtnPrintSalesReports_Click(object sender, EventArgs e)
@@ -33,16 +34,38 @@ namespace LactoBioticsSystem
             new Reports.ViewSalesReport(filteredSalesReport).ShowDialog();
         }
 
-        private void Cmbbox_salesReportFilter_SelectedIndexChanged(object sender, EventArgs e)
+        private void Datepicker_startDate_ValueChanged(object sender, EventArgs e)
         {
-            switch (cmbbox_salesReportFilter.Text)
+            updateSalesReportTable();
+        }
+        private void Datepicker_enddate_ValueChanged(object sender, EventArgs e)
+        {
+            updateSalesReportTable();
+        }
+        private void updateSalesReportTable()
+        {
+            filteredSalesReport = (from sales in db.SalesReports where sales.date_.Value.Date >= datepicker_startDate.Value.Date && sales.date_.Value.Date <= datepicker_enddate.Value.Date.Date select sales);
+            dgvSalesInventory.DataSource = filteredSalesReport;
+            dgvSalesInventory.Refresh();
+        }
+
+        private void ComboBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            toggleDatePickerVisibility(false);
+            switch (cmbbox_filter.Text)
             {
                 case "Daily": filteredSalesReport = (from sales in db.SalesReports where sales.date_.Value.Date == DateTime.Now.Date select sales); break;
-                case "Weekly": filteredSalesReport = (from sales in db.SalesReports where sales.date_.Value.Date >= DateTime.Now.AddDays(-7).Date && sales.date_.Value.Date <= DateTime.Now.Date select sales); break;
-                case "Month": filteredSalesReport = (from sales in db.SalesReports where sales.date_.Value.Date >= DateTime.Now.AddMonths(-1).Date && sales.date_.Value.Date <= DateTime.Now.Date select sales); break;
+                case "Weekly": filteredSalesReport = (from sales in db.SalesReports where sales.date_.Value.Date >= DateTime.Now.AddDays(-7) && sales.date_.Value.Date <= DateTime.Now.Date select sales); break;
+                case "Monthly": filteredSalesReport = (from sales in db.SalesReports where sales.date_.Value.Date >= DateTime.Now.AddMonths(-1).Date && sales.date_.Value.Date <= DateTime.Now.Date select sales); break;
+                case "Custom": toggleDatePickerVisibility(true);break;
             }
             dgvSalesInventory.DataSource = filteredSalesReport;
             dgvSalesInventory.Refresh();
+        }
+        private void toggleDatePickerVisibility(bool boolean)
+        {
+            datepicker_startDate.Visible = boolean;
+            datepicker_enddate.Visible = boolean;
         }
     }
 }

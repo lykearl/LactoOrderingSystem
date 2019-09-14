@@ -31,12 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewSalesReportsForm));
             this.picboxPUclose = new System.Windows.Forms.PictureBox();
             this.btnPrintSalesReports = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtSearch = new System.Windows.Forms.TextBox();
             this.dgvSalesInventory = new System.Windows.Forms.DataGridView();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.cmbbox_salesReportFilter = new System.Windows.Forms.ComboBox();
+            this.datepicker_startDate = new System.Windows.Forms.DateTimePicker();
+            this.datepicker_enddate = new System.Windows.Forms.DateTimePicker();
+            this.cmbbox_filter = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.picboxPUclose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesInventory)).BeginInit();
             this.SuspendLayout();
@@ -46,7 +46,7 @@
             this.picboxPUclose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picboxPUclose.Image = ((System.Drawing.Image)(resources.GetObject("picboxPUclose.Image")));
             this.picboxPUclose.Location = new System.Drawing.Point(1341, 2);
-            this.picboxPUclose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picboxPUclose.Margin = new System.Windows.Forms.Padding(4);
             this.picboxPUclose.Name = "picboxPUclose";
             this.picboxPUclose.Size = new System.Drawing.Size(43, 41);
             this.picboxPUclose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -61,7 +61,7 @@
             this.btnPrintSalesReports.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrintSalesReports.ForeColor = System.Drawing.Color.White;
             this.btnPrintSalesReports.Location = new System.Drawing.Point(577, 635);
-            this.btnPrintSalesReports.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPrintSalesReports.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintSalesReports.Name = "btnPrintSalesReports";
             this.btnPrintSalesReports.Size = new System.Drawing.Size(175, 46);
             this.btnPrintSalesReports.TabIndex = 47;
@@ -69,33 +69,13 @@
             this.btnPrintSalesReports.UseVisualStyleBackColor = false;
             this.btnPrintSalesReports.Click += new System.EventHandler(this.BtnPrintSalesReports_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(263, 170);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 23);
-            this.label1.TabIndex = 46;
-            this.label1.Text = "Search";
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Location = new System.Drawing.Point(333, 170);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(619, 22);
-            this.txtSearch.TabIndex = 45;
-            // 
             // dgvSalesInventory
             // 
             this.dgvSalesInventory.AllowUserToAddRows = false;
             this.dgvSalesInventory.AllowUserToDeleteRows = false;
             this.dgvSalesInventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSalesInventory.Location = new System.Drawing.Point(148, 202);
-            this.dgvSalesInventory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvSalesInventory.Margin = new System.Windows.Forms.Padding(4);
             this.dgvSalesInventory.Name = "dgvSalesInventory";
             this.dgvSalesInventory.ReadOnly = true;
             this.dgvSalesInventory.RowHeadersWidth = 51;
@@ -127,19 +107,38 @@
             this.label7.Text = "_________________________________________________________________________________" +
     "______________________________";
             // 
-            // cmbbox_salesReportFilter
+            // datepicker_startDate
             // 
-            this.cmbbox_salesReportFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbbox_salesReportFilter.FormattingEnabled = true;
-            this.cmbbox_salesReportFilter.Items.AddRange(new object[] {
+            this.datepicker_startDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.datepicker_startDate.Location = new System.Drawing.Point(589, 173);
+            this.datepicker_startDate.Name = "datepicker_startDate";
+            this.datepicker_startDate.Size = new System.Drawing.Size(200, 22);
+            this.datepicker_startDate.TabIndex = 51;
+            this.datepicker_startDate.ValueChanged += new System.EventHandler(this.Datepicker_startDate_ValueChanged);
+            // 
+            // datepicker_enddate
+            // 
+            this.datepicker_enddate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.datepicker_enddate.Location = new System.Drawing.Point(795, 173);
+            this.datepicker_enddate.Name = "datepicker_enddate";
+            this.datepicker_enddate.Size = new System.Drawing.Size(200, 22);
+            this.datepicker_enddate.TabIndex = 52;
+            this.datepicker_enddate.ValueChanged += new System.EventHandler(this.Datepicker_enddate_ValueChanged);
+            // 
+            // cmbbox_filter
+            // 
+            this.cmbbox_filter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbbox_filter.FormattingEnabled = true;
+            this.cmbbox_filter.Items.AddRange(new object[] {
             "Daily",
             "Weekly",
-            "Monthly"});
-            this.cmbbox_salesReportFilter.Location = new System.Drawing.Point(1130, 171);
-            this.cmbbox_salesReportFilter.Name = "cmbbox_salesReportFilter";
-            this.cmbbox_salesReportFilter.Size = new System.Drawing.Size(121, 24);
-            this.cmbbox_salesReportFilter.TabIndex = 51;
-            this.cmbbox_salesReportFilter.SelectedIndexChanged += new System.EventHandler(this.Cmbbox_salesReportFilter_SelectedIndexChanged);
+            "Monthly",
+            "Custom"});
+            this.cmbbox_filter.Location = new System.Drawing.Point(1130, 171);
+            this.cmbbox_filter.Name = "cmbbox_filter";
+            this.cmbbox_filter.Size = new System.Drawing.Size(121, 24);
+            this.cmbbox_filter.TabIndex = 53;
+            this.cmbbox_filter.SelectedValueChanged += new System.EventHandler(this.ComboBox1_SelectedValueChanged);
             // 
             // ViewSalesReportsForm
             // 
@@ -147,16 +146,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(44)))), ((int)(((byte)(46)))));
             this.ClientSize = new System.Drawing.Size(1387, 714);
-            this.Controls.Add(this.cmbbox_salesReportFilter);
+            this.Controls.Add(this.cmbbox_filter);
+            this.Controls.Add(this.datepicker_enddate);
+            this.Controls.Add(this.datepicker_startDate);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.picboxPUclose);
             this.Controls.Add(this.btnPrintSalesReports);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.dgvSalesInventory);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ViewSalesReportsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ViewSalesReportsForm";
@@ -172,11 +171,11 @@
 
         private System.Windows.Forms.PictureBox picboxPUclose;
         private System.Windows.Forms.Button btnPrintSalesReports;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.DataGridView dgvSalesInventory;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cmbbox_salesReportFilter;
+        private System.Windows.Forms.DateTimePicker datepicker_startDate;
+        private System.Windows.Forms.DateTimePicker datepicker_enddate;
+        private System.Windows.Forms.ComboBox cmbbox_filter;
     }
 }
