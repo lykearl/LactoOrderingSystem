@@ -16,11 +16,12 @@ namespace LactoBioticsSystem.Products_Management
         public static int catSoap;
         public static int catDogFood;
         public static int catHerbal;
-
-
         public ProductAddForm()
         {
-            InitializeComponent();
+            InitializeComponent();4
+            catSoap = (from soap in db.products where soap.product_category == "Soap" select soap).Count();
+            catDogFood = (from dogFood in db.products where dogFood.product_category == "Dog Food" select dogFood).Count();
+            catHerbal = (from herbal in db.products where herbal.product_category == "Herbal Medicine" select herbal).Count();
         }
         DatabaseDataContext db = new DatabaseDataContext();
         private void BtnAddProduct_Click(object sender, EventArgs e)
