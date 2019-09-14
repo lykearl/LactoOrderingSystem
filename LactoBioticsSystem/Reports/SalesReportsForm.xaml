@@ -17,6 +17,19 @@
                 PageWidth="13in">
                 <BlockUIContainer>
                     <StackPanel>
+                        <Grid>
+                            <TextBlock>
+                                <Run Text="Printed By: " />
+                                <Run Text="{Binding User.user_Fname}" />
+                                <Run Text=" " />
+                                <Run Text="{Binding User.user_Lname}" />
+                            </TextBlock>
+                            <TextBlock HorizontalAlignment="Right">
+                                <Run Text="Date: " />
+                                <Run Text="{Binding Now.Date, Mode=OneTime, StringFormat=d}" />
+                            </TextBlock>
+                        </Grid>
+                        <TextBlock HorizontalAlignment="Center" FontSize="40">Sales Report</TextBlock>
                         <DataGrid
                             AutoGenerateColumns="False"
                             IsReadOnly="False"

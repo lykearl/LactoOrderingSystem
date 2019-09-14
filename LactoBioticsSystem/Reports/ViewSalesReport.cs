@@ -18,15 +18,21 @@ namespace LactoBioticsSystem.Reports
         class SalesReportViewModel
         {
             public List<SalesReport> SalesReports { get; set; }
+            public User_acc User { get; set; } = ClsLogin.User;
+
+            public DateTime Now{
+                get { return DateTime.Now; }
+                set { Now = value; }
+            }
+
         }
         public ViewSalesReport(IQueryable<SalesReport> salesReport)
         {
             InitializeComponent();
-            var VM = new SalesReportViewModel { SalesReports = salesReport.ToList()};
+            var VM = new SalesReportViewModel { SalesReports = salesReport.ToList() };
             salesReportsForm.DataContext = VM;
         }
-
-        private void ViewSalesReport_Load(object sender, EventArgs e)
+        private void ViewSalesReport_Load(object senderz, EventArgs e)
         {
         }
 

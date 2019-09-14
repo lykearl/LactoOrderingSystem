@@ -40,6 +40,7 @@ namespace LactoBioticsSystem
                 dgvLogin.DataSource = db.sp_login_acc(txtUser.Text, txtPass.Text);
                 if (result > 0)
                 {
+                    ClsLogin.User = (from user in db.User_accs where txtUser.Text == user.user_uname && txtPass.Text == user.user_pass select user).First();
                     ClsLogin.userID = dgvLogin.Rows[0].Cells[0].Value.ToString();
                     ClsLogin.username = dgvLogin.Rows[0].Cells[1].Value.ToString();
                     ClsLogin.usertype = dgvLogin.Rows[0].Cells[3].Value.ToString();
