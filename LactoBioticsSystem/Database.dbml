@@ -1,0 +1,514 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="LactoBioticsss" Class="DatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-EFV0F9NE\CEJASEARL;Initial Catalog=LactoBioticsss;Integrated Security=True" SettingsObjectName="LactoBioticsSystem.Properties.Settings" SettingsPropertyName="LactoBioticsssConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.customers" Member="customers">
+    <Type Name="customer">
+      <Column Name="customer_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="users_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="customer_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="tin" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="address_" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="business_style" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="contact_no" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="customer_type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="date_" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="customer_ProductsDelivery" Member="ProductsDeliveries" ThisKey="customer_id" OtherKey="customer_id" Type="ProductsDelivery" />
+      <Association Name="customer_ProductsReservation" Member="ProductsReservations" ThisKey="customer_id" OtherKey="customer_id" Type="ProductsReservation" />
+      <Association Name="customer_SalesReport" Member="SalesReports" ThisKey="customer_id" OtherKey="customer_id" Type="SalesReport" />
+      <Association Name="User_acc_customer" Member="User_acc" ThisKey="users_id" OtherKey="users_id" Type="User_acc" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.User_acc" Member="User_accs">
+    <Type Name="User_acc">
+      <Column Name="users_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="user_uname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_pass" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_type" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="user_Fname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_Lname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="user_status" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="secQuest" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="secAns" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="date_reg" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="User_acc_customer" Member="customers" ThisKey="users_id" OtherKey="users_id" Type="customer" />
+      <Association Name="User_acc_inventory" Member="inventories" ThisKey="users_id" OtherKey="users_id" Type="inventory" />
+      <Association Name="User_acc_product" Member="products" ThisKey="users_id" OtherKey="users_id" Type="product" />
+      <Association Name="User_acc_ProductsDelivery" Member="ProductsDeliveries" ThisKey="users_id" OtherKey="users_id" Type="ProductsDelivery" />
+      <Association Name="User_acc_ProductsReservation" Member="ProductsReservations" ThisKey="users_id" OtherKey="users_id" Type="ProductsReservation" />
+      <Association Name="User_acc_SalesReport" Member="SalesReports" ThisKey="users_id" OtherKey="users_id" Type="SalesReport" />
+      <Association Name="User_acc_stock" Member="stocks" ThisKey="users_id" OtherKey="users_id" Type="stock" />
+    </Type>
+  </Table>
+  <Table Name="dbo.inventory" Member="inventories">
+    <Type Name="inventory">
+      <Column Name="inventory_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="productID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="stock_in" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="users_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="stock_in_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="User_acc_inventory" Member="User_acc" ThisKey="users_id" OtherKey="users_id" Type="User_acc" IsForeignKey="true" />
+      <Association Name="product_inventory" Member="product" ThisKey="productID" OtherKey="productID" Type="product" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.products" Member="products">
+    <Type Name="product">
+      <Column Name="productID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="users_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_category" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_price" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_description" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="date_" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="product_inventory" Member="inventories" ThisKey="productID" OtherKey="productID" Type="inventory" />
+      <Association Name="product_ProductsDelivery" Member="ProductsDeliveries" ThisKey="productID" OtherKey="productID" Type="ProductsDelivery" />
+      <Association Name="product_ProductsReservation" Member="ProductsReservations" ThisKey="productID" OtherKey="productID" Type="ProductsReservation" />
+      <Association Name="product_SalesReport" Member="SalesReports" ThisKey="productID" OtherKey="productID" Type="SalesReport" />
+      <Association Name="product_stock" Member="stocks" ThisKey="productID" OtherKey="productID" Type="stock" />
+      <Association Name="User_acc_product" Member="User_acc" ThisKey="users_id" OtherKey="users_id" Type="User_acc" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProductsDelivery" Member="ProductsDeliveries">
+    <Type Name="ProductsDelivery">
+      <Column Name="DeliveryId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="productID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="totalPrice" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="transactiontype" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Delivery_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="deliveryStatus" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="customer_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="users_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Date_" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="customer_ProductsDelivery" Member="customer" ThisKey="customer_id" OtherKey="customer_id" Type="customer" IsForeignKey="true" />
+      <Association Name="product_ProductsDelivery" Member="product" ThisKey="productID" OtherKey="productID" Type="product" IsForeignKey="true" />
+      <Association Name="User_acc_ProductsDelivery" Member="User_acc" ThisKey="users_id" OtherKey="users_id" Type="User_acc" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProductsReservation" Member="ProductsReservations">
+    <Type Name="ProductsReservation">
+      <Column Name="ReservationId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="productID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="totalPrice" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="transactiontype" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ClaimDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="reservationStatus" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="customer_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="users_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Reservation_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="customer_ProductsReservation" Member="customer" ThisKey="customer_id" OtherKey="customer_id" Type="customer" IsForeignKey="true" />
+      <Association Name="product_ProductsReservation" Member="product" ThisKey="productID" OtherKey="productID" Type="product" IsForeignKey="true" />
+      <Association Name="User_acc_ProductsReservation" Member="User_acc" ThisKey="users_id" OtherKey="users_id" Type="User_acc" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SalesReports" Member="SalesReports">
+    <Type Name="SalesReport">
+      <Column Name="SalesReport_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="productID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="transactiontype" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="customer_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="users_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="date_" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="customer_SalesReport" Member="customer" ThisKey="customer_id" OtherKey="customer_id" Type="customer" IsForeignKey="true" />
+      <Association Name="product_SalesReport" Member="product" ThisKey="productID" OtherKey="productID" Type="product" IsForeignKey="true" />
+      <Association Name="User_acc_SalesReport" Member="User_acc" ThisKey="users_id" OtherKey="users_id" Type="User_acc" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.stocks" Member="stocks">
+    <Type Name="stock">
+      <Column Name="stocks_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="productID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="stock_in" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="users_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="stock_in_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="product_stock" Member="product" ThisKey="productID" OtherKey="productID" Type="product" IsForeignKey="true" />
+      <Association Name="User_acc_stock" Member="User_acc" ThisKey="users_id" OtherKey="users_id" Type="User_acc" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.ChangePassword" Method="ChangePassword">
+    <Parameter Name="user_uname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="newPass" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spGenerateSoapProCode" Method="spGenerateSoapProCode">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.forgotPassword" Method="forgotPassword">
+    <Parameter Name="user_uname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="secQuest" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="secAns" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="forgotPasswordResult">
+      <Column Name="users_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="user_uname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_pass" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_type" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="user_Fname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_Lname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="user_status" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="secQuest" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="secAns" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="date_reg" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_add_acc" Method="sp_add_acc">
+    <Parameter Name="user_uname" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="user_pass" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="user_type" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="user_Fname" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="user_Lname" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="user_email" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="user_status" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="secQuest" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="secAns" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="date_reg" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_add_customer" Method="sp_add_customer">
+    <Parameter Name="users_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="customer_name" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="tin" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="address_" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="business_style" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="contact_no" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="customer_type" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="date_" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_add_delivery" Method="sp_add_delivery">
+    <Parameter Name="productId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="order_quantity" Type="System.Int32" DbType="Int" />
+    <Parameter Name="totalPrice" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="transactiontype" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Delivery_Date" Parameter="delivery_Date" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="deliveryStatus" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="customer_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="user_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Date_" Parameter="date_" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_add_inventory" Method="sp_add_inventory">
+    <Parameter Name="productID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="stock_in" Type="System.Int32" DbType="Int" />
+    <Parameter Name="users_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="stock_in_date" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_add_products" Method="sp_add_products">
+    <Parameter Name="users_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="product_code" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="product_name" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="product_category" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="product_price" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="product_description" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="date_" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_add_reservation" Method="sp_add_reservation">
+    <Parameter Name="productId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="order_quantity" Type="System.Int32" DbType="Int" />
+    <Parameter Name="totalPrice" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="transactiontype" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ClaimDate" Parameter="claimDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="reservationStatus" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="customer_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="user_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Reservation_Date" Parameter="reservation_Date" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_add_SalesReports" Method="sp_add_SalesReports">
+    <Parameter Name="productID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="order_quantity" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TotalAmount" Parameter="totalAmount" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="transactiontype" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="customer_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="users_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="date_" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_add_stocks" Method="sp_add_stocks">
+    <Parameter Name="productID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="stock_in" Type="System.Int32" DbType="Int" />
+    <Parameter Name="users_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="stock_in_date" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_cancel_order" Method="sp_cancel_order">
+    <Parameter Name="quantityToRevert" Type="System.Int32" DbType="Int" />
+    <Parameter Name="product_ID" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_delete_acc" Method="sp_delete_acc">
+    <Parameter Name="users_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_delete_stocks" Method="sp_delete_stocks">
+    <Parameter Name="stocks_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_login_acc" Method="sp_login_acc">
+    <Parameter Name="user_uname" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="user_pass" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_login_accResult">
+      <Column Name="users_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="user_uname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_pass" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_type" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="user_Fname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_Lname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="user_status" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="secQuest" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="secAns" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="date_reg" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_remove_customer" Method="sp_remove_customer">
+    <Parameter Name="customer_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_remove_products" Method="sp_remove_products">
+    <Parameter Name="productID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_search_customer" Method="sp_search_customer">
+    <Parameter Name="key" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_search_customerResult">
+      <Column Name="customer_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="users_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="customer_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="tin" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="address_" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="business_style" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="contact_no" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="customer_type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="date_" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_search_products" Method="sp_search_products">
+    <Parameter Name="key" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_search_productsResult">
+      <Column Name="productID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="users_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_category" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_price" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_description" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="date_" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_search_stocks" Method="sp_search_stocks">
+    <Parameter Name="key" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_search_stocksResult">
+      <Column Name="stocks_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="productID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="stock_in" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="users_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="stock_in_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_search_user_acc" Method="sp_search_user_acc">
+    <Parameter Name="key" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_search_user_accResult">
+      <Column Name="users_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="user_uname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_pass" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_type" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="user_Fname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_Lname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="user_status" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="secQuest" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="secAns" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="date_reg" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_select_delivery" Method="sp_select_delivery">
+    <ElementType Name="sp_select_deliveryResult">
+      <Column Name="DeliveryId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="productId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="product_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="order_quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="totalPrice" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="transactiontype" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Delivery_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="deliveryStatus" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="customer_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="address_" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="customer_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="users_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Date_" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_select_reservation" Method="sp_select_reservation">
+    <ElementType Name="sp_select_reservationResult">
+      <Column Name="ReservationId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="productId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="product_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="order_quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="totalPrice" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="transactiontype" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ClaimDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="reservationStatus" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="customer_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="address_" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="customer_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="users_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Reservation_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_select_stocks_inventory" Method="sp_select_stocks_inventory">
+    <ElementType Name="sp_select_stocks_inventoryResult">
+      <Column Name="inventory_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="productID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="product_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_category" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_price" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="stock_in" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_description" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="user_Fname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_Lname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="users_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="stock_in_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_update_acc" Method="sp_update_acc">
+    <Parameter Name="users_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="user_uname" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="user_pass" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="user_type" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="user_Fname" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="user_Lname" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="user_email" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="user_status" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="secQuest" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="secAns" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="date_reg" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_update_customer" Method="sp_update_customer">
+    <Parameter Name="customer_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="customer_name" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="tin" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="address_" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="business_style" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="contact_no" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="customer_type" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="date_" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_update_delivery" Method="sp_update_delivery">
+    <Parameter Name="DeliveryId" Parameter="deliveryId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="deliveryStatus" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_update_products" Method="sp_update_products">
+    <Parameter Name="productID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="product_code" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="product_name" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="product_catergory" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="product_price" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="product_description" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="date_" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_update_reservation" Method="sp_update_reservation">
+    <Parameter Name="ReservationId" Parameter="reservationId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="reservationStatus" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_update_stocks" Method="sp_update_stocks">
+    <Parameter Name="stocks_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="productID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="stock_in" Type="System.Int32" DbType="Int" />
+    <Parameter Name="stock_in_date" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_update_stocks_pro" Method="sp_update_stocks_pro">
+    <Parameter Name="productID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="stock_in" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_view_acc" Method="sp_view_acc">
+    <ElementType Name="sp_view_accResult">
+      <Column Name="users_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="user_uname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_pass" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_type" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="user_Fname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_Lname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="user_status" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="secQuest" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="secAns" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="date_reg" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_view_customer" Method="sp_view_customer">
+    <ElementType Name="sp_view_customerResult">
+      <Column Name="customer_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="users_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="customer_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="tin" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="address_" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="business_style" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="contact_no" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="customer_type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="date_" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_view_products" Method="sp_view_products">
+    <ElementType Name="sp_view_productsResult">
+      <Column Name="productID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="users_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_category" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_price" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_description" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="date_" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_view_SalesReports" Method="sp_view_SalesReports">
+    <ElementType Name="sp_view_SalesReportsResult">
+      <Column Name="SalesReport_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="productID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="product_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_category" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_price" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="transactiontype" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_description" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="customer_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="users_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="date_" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_view_stocks" Method="sp_view_stocks">
+    <ElementType Name="sp_view_stocksResult">
+      <Column Name="stocks_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="productID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_category" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_price" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="stock_in" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_description" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spGenerateDogFoodProCode" Method="spGenerateDogFoodProCode">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spGenerateHerbalProCode" Method="spGenerateHerbalProCode">
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

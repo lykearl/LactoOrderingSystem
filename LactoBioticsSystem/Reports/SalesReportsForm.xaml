@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="LactoBioticsSystem.Reports.SalesReportsForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LactoBioticsSystem.Reports"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel>
+        <FlowDocumentReader ViewingMode="Page">
+            <FlowDocument x:Name="fd_document" ColumnWidth="13in" PageWidth="13in" PageHeight="8.5in">
+                <BlockUIContainer>
+                    <StackPanel>
+                        <DataGrid ItemsSource="{Binding SalesReports}" AutoGenerateColumns="False" IsReadOnly="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ProductID" Binding="{Binding productID}"/>
+                                <DataGridTextColumn Header="Product Code" Binding="{Binding product.product_code}"/>
+                                <DataGridTextColumn Header="Name" Binding="{Binding product.product_name}"/>
+                                <DataGridTextColumn Header="Category" Binding="{Binding product.product_category}"/>
+                                <DataGridTextColumn Header="Price" Binding="{Binding product.product_price}"/>
+                                <DataGridTextColumn Header="Quantity" Binding="{Binding order_quantity}"/>
+                                <DataGridTextColumn Header="Total" Binding="{Binding TotalAmount}"/>
+                                <DataGridTextColumn Header="Description" Binding="{Binding product.product_description}"/>
+                                <DataGridTextColumn Header="CustomerID" Binding="{Binding customer_id}"/>
+                                <DataGridTextColumn Header="UserID" Binding="{Binding users_id}"/>
+                                <DataGridTextColumn Header="Date" Binding="{Binding date_}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button Click="btn_print_click" Content="PRINT"/>
+                    </StackPanel>
+                </BlockUIContainer>
+            </FlowDocument>
+        </FlowDocumentReader>
+    </StackPanel>
+</UserControl>
