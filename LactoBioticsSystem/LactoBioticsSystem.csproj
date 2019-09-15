@@ -133,6 +133,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\InventoryReportXAML.xaml.cs">
+      <DependentUpon>InventoryReportXAML.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Reports\SalesReportsForm.xaml.cs">
       <DependentUpon>SalesReportsForm.xaml</DependentUpon>
     </Compile>
@@ -269,6 +272,10 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Reports\InventoryReportXAML.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Reports\SalesReportsForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

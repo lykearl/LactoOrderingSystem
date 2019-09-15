@@ -18,7 +18,7 @@ namespace LactoBioticsSystem.Products_Management
         public static int catHerbal;
         public ProductAddForm()
         {
-            InitializeComponent();4
+            InitializeComponent();
             catSoap = (from soap in db.products where soap.product_category == "Soap" select soap).Count();
             catDogFood = (from dogFood in db.products where dogFood.product_category == "Dog Food" select dogFood).Count();
             catHerbal = (from herbal in db.products where herbal.product_category == "Herbal Medicine" select herbal).Count();

@@ -20,7 +20,7 @@ namespace LactoBioticsSystem.Reports
             public List<SalesReport> SalesReports { get; set; }
             public User_acc User { get; set; } = ClsLogin.User;
 
-            public DateTime Now{
+            public DateTime Now {
                 get { return DateTime.Now; }
                 set { Now = value; }
             }
@@ -40,7 +40,7 @@ namespace LactoBioticsSystem.Reports
         {
             Print(salesReportsForm.fd_document);
         }
-          public void Print(FlowDocument fd)
+        public void Print(FlowDocument fd)
         {
             var pd = new System.Windows.Controls.PrintDialog();
             if (pd.ShowDialog().Value)

@@ -1,0 +1,59 @@
+﻿<UserControl
+    x:Class="LactoBioticsSystem.Reports.InventoryReportXAML"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:LactoBioticsSystem.Reports"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="816"
+    d:DesignWidth="1248"
+    mc:Ignorable="d">
+    <Grid Background="White">
+        <FlowDocumentScrollViewer>
+            <FlowDocument
+                x:Name="fd_InventoryReport"
+                ColumnWidth="8.5in"
+                PageHeight="13in">
+                <BlockUIContainer>
+                    <StackPanel Orientation="Vertical">
+                        <Grid>
+                            <TextBlock HorizontalAlignment="Left">
+                                <Run Text="Printed By: " />
+                                <Run Text="{Binding User.user_Fname}" />
+                                <Run Text=" " />
+                                <Run Text="{Binding User.user_Lname}" />
+                            </TextBlock>
+                            <TextBlock HorizontalAlignment="Right">
+                                <Run Text="Date Printed: " />
+                                <Run Text="{Binding Now.Date, Mode=OneWay}" />
+                            </TextBlock>
+                        </Grid>
+                        <TextBlock HorizontalAlignment="Center" FontSize="30">Inventory Report</TextBlock>
+                        <DataGrid
+                            AutoGenerateColumns="False"
+                            ColumnWidth="1*"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding Inventories}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding product.product_name}" Header="Product Name" />
+                                <DataGridTextColumn Binding="{Binding stock_in}" Header="Stocks Added" />
+                                <DataGridTextColumn Binding="{Binding stock_in_date}" Header="Date Processed" />
+                                <DataGridTemplateColumn Header="Processed By">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock>
+                                                <Run Text="{Binding User_acc.user_Fname}" />
+                                                <Run Text=" " />
+                                                <Run Text="{Binding User_acc.user_Lname}" />
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </BlockUIContainer>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </Grid>
+</UserControl>
